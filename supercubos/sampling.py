@@ -1,5 +1,5 @@
 import numpy as np
-from _sampling import latin_sample as _sample
+from csampling import latin_sample as _sample
 
 
 
