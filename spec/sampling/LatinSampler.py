@@ -30,13 +30,3 @@ def describe_latin_sampler():
 
             assert lh_samples[0,0] in {0.5, 1.5, 2.5}
             assert lh_samples.shape == (3, 2)
-
-    def describe_check_numerical_sanity():
-
-        @pytest.fixture
-        def sampler():
-            return LatinSampler()
-
-        def it_raises_an_error_if_there_arent_enough_samples(sampler):
-            with pytest.raises(TooFewSamplesError):
-                sampler._check_numerical_sanity(3, 2)
