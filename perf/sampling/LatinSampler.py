@@ -28,7 +28,7 @@ def describe_latin_sampler_speed():
 
         def sampling_is_still_fast(sampler, benchmark):
             dim = 10
-            nsamps = 100
+            nsamps = 10000
 
             param_mins = np.zeros(dim)
             param_maxes = np.ones(dim)
