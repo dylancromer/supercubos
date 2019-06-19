@@ -7,7 +7,7 @@ from supercubos.sampling import LatinSampler
 
 def describe_latin_sampler_speed():
 
-    def describe_sample():
+    def describe_get_lh_sample():
 
         @pytest.fixture
         def sampler():
@@ -18,4 +18,4 @@ def describe_latin_sampler_speed():
             param_maxes = np.ones(10)
             nsamps = 10000
 
-            benchmark(sampler.sample, param_mins, param_maxes, nsamps)
+            benchmark(sampler.get_lh_sample, param_mins, param_maxes, nsamps)
