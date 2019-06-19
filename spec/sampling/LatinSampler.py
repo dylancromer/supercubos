@@ -30,3 +30,22 @@ def describe_latin_sampler():
 
             assert lh_samples[0,0] in {0.5, 1.5, 2.5}
             assert lh_samples.shape == (3, 2)
+
+    def describe_get_sym_sample():
+
+        @pytest.fixture
+        def sampler():
+            return LatinSampler()
+
+        def it_works_for_a_trivial_case(sampler):
+            dim = 2
+            nsamps = 6
+
+            param_mins = np.zeros(dim)
+            param_maxes = nsamps*np.ones(dim)
+
+            lh_samples = sampler.get_sym_sample(param_mins, param_maxes, nsamps)
+
+            for samp in lh_samples:
+                reflection = (nsamps - 1) - samp
+                assert any((lh_samples[:] == reflection).all(axis=1))
