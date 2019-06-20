@@ -3,11 +3,11 @@ import numpy as np
 
 
 
-class TooFewSamplesError(Exception):
-    pass
-
-
 class LatinSampler:
+    def _check_num_is_even(self, num):
+        if num % 2 != 0:
+            raise ValueError("Number of samples must be even")
+
     def get_lh_sample(self, param_mins, param_maxes, num_samples):
         dim = param_mins.size
 
@@ -17,6 +17,8 @@ class LatinSampler:
         return lengths*(latin_points + 0.5)/num_samples + param_mins[None, :]
 
     def get_sym_sample(self, param_mins, param_maxes, num_samples):
+        self._check_num_is_even(num_samples)
+
         dim = param_mins.size
 
         even_nums = np.arange(0, num_samples, 2)
