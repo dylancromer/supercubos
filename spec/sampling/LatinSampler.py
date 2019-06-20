@@ -47,5 +47,5 @@ def describe_latin_sampler():
             lh_samples = sampler.get_sym_sample(param_mins, param_maxes, nsamps)
 
             for samp in lh_samples:
-                reflection = (nsamps - 1) - samp
+                reflection = nsamps - samp
                 assert any((lh_samples[:] == reflection).all(axis=1))
