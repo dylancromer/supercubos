@@ -13,8 +13,8 @@ class LatinSampler:
 
         latin_points = np.array([np.random.permutation(num_samples) for i in range(dim)]).T
 
-        lengths = param_maxes - param_mins
-        return lengths*(latin_points + 0.5)/num_samples
+        lengths = (param_maxes - param_mins)[None, :]
+        return lengths*(latin_points + 0.5)/num_samples + param_mins[None, :]
 
     def get_sym_sample(self, param_mins, param_maxes, num_samples):
         dim = param_mins.size
@@ -25,5 +25,5 @@ class LatinSampler:
 
         latin_points = np.concatenate((permutations,inverses), axis=1).T
 
-        lengths = param_maxes - param_mins
-        return  lengths*(latin_points + 0.5)/num_samples
+        lengths = (param_maxes - param_mins)[None, :]
+        return  lengths*(latin_points + 0.5)/num_samples + param_mins[None, :]
