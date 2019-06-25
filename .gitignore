@@ -1,6 +1,8 @@
 # Project specific
 venv-supercubos
 *.c
+**/*DS_Store
+ipynbs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
