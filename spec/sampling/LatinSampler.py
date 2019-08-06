@@ -1,6 +1,6 @@
 import pytest
 import numpy as np
-from supercubos.sampling import LatinSampler, TooFewSamplesError
+from supercubos.sampling import LatinSampler
 
 
 
