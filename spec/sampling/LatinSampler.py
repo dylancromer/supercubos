@@ -47,3 +47,21 @@ def describe_latin_sampler():
             for samp in lh_samples:
                 reflection = nsamps - samp
                 assert any((lh_samples[:] == reflection).all(axis=1))
+
+    def describe_get_rand_sample():
+
+        @pytest.fixture
+        def sampler():
+            return LatinSampler()
+
+        def it_works(sampler):
+            dim = 2
+            nsamps = 6
+
+            param_mins = np.zeros(dim)
+            param_maxes = nsamps*np.ones(dim)
+
+            lh_samples = sampler.get_rand_sample(param_mins, param_maxes, nsamps)
+
+            assert np.all(lh_samples >= param_mins)
+            assert np.all(lh_samples <= param_maxes)
