@@ -27,3 +27,8 @@ class LatinSampler:
 
         lengths = (param_maxes - param_mins)[None, :]
         return  lengths*(latin_points + 0.5)/num_samples + param_mins[None, :]
+
+    def get_rand_sample(self, param_mins, param_maxes, num_samples):
+        dim = param_mins.size
+        lengths = param_maxes - param_mins
+        return lengths[None, :]*np.random.rand(nsamps, dim) + param_mins[None, :]
