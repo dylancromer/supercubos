@@ -1,8 +1,6 @@
 import numpy as np
 
 
-
-
 class LatinSampler:
     def _check_num_is_even(self, num):
         if num % 2 != 0:

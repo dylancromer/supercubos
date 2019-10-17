@@ -1,8 +1,6 @@
 import pytest
 import numpy as np
-from supercubos.sampling import LatinSampler
-
-
+from supercubos import LatinSampler
 
 
 def describe_latin_sampler_speed():
