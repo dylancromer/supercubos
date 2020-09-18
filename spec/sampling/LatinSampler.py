@@ -29,6 +29,15 @@ def describe_latin_sampler():
             assert lh_samples[0,0] in {0.5, 1.5, 2.5}
             assert lh_samples.shape == (3, 2)
 
+        def you_can_change_the_rng():
+            sampler = LatinSampler(rng=np.random.default_rng(seed=13))
+            param_mins = np.zeros(2)
+            param_maxes = np.ones(2)
+
+            lh_samples = sampler.get_lh_sample(param_mins, param_maxes, 2)
+            assert lh_samples[0,0] == 0.75
+            assert lh_samples.shape == (2,2)
+
     def describe_get_sym_sample():
 
         @pytest.fixture

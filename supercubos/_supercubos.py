@@ -1,7 +1,11 @@
+from dataclasses import dataclass
 import numpy as np
 
 
+@dataclass
 class LatinSampler:
+    rng: object = np.random.default_rng()
+
     def _check_num_is_even(self, num):
         if num % 2 != 0:
             raise ValueError("Number of samples must be even")
@@ -9,7 +13,7 @@ class LatinSampler:
     def get_lh_sample(self, param_mins, param_maxes, num_samples):
         dim = param_mins.size
 
-        latin_points = np.array([np.random.permutation(num_samples) for i in range(dim)]).T
+        latin_points = np.array([self.rng.permutation(num_samples) for i in range(dim)]).T
 
         lengths = (param_maxes - param_mins)[None, :]
         return lengths*(latin_points + 0.5)/num_samples + param_mins[None, :]
@@ -20,7 +24,7 @@ class LatinSampler:
         dim = param_mins.size
 
         even_nums = np.arange(0, num_samples, 2)
-        permutations = np.array([np.random.permutation(even_nums) for i in range(dim)])
+        permutations = np.array([self.rng.permutation(even_nums) for i in range(dim)])
         inverses = (num_samples - 1) - permutations
 
         latin_points = np.concatenate((permutations,inverses), axis=1).T
@@ -31,4 +35,4 @@ class LatinSampler:
     def get_rand_sample(self, param_mins, param_maxes, num_samples):
         dim = param_mins.size
         lengths = param_maxes - param_mins
-        return lengths[None, :]*np.random.rand(num_samples, dim) + param_mins[None, :]
+        return lengths[None, :]*self.rng.random((num_samples, dim)) + param_mins[None, :]
